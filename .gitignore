@@ -1,0 +1,10 @@
+# python
+*.py[cdo]
+__pycache__/
+
+# editor and pyenv
+.python-version
+/.vim/
+
+# private files
+/secret.py
