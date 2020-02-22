@@ -1,6 +1,12 @@
 body {
   background: white;
+  font-family: 'Open Sans', sans-serif;
 }
+
+h1 {
+  font-family: 'Merriweather', serif;
+}
+
 table {
   box-sizing: border-box;
   margin: 0;
