@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Life calendar</title>
+    <link rel="stylesheet" href=".{{ url_for('static', filename='screen.css') }}">
+</head>
+<body>
+  <h1>90-year life calendar ({{ birthday }})</h1>
+  <p>Idea taken from <a href="https://waitbutwhy.com/2014/05/life-weeks.html">this post from waitbutwhy</a>.</p>
+  <table>
+    {% for y in range(90) %}
+    <tr>
+      {% for w in range(52) %}
+      <td class="week {% if (y * 52 + w) < used_weeks %}spent{% endif %}"></td>
+      {% endfor %}
+    </tr>
+    {% endfor %}
+  </table>
+  <p><a href="https://github.com/e0en/life-calendar">github: e0en/life-calendar</a></p>
+</body>
+</html>
+

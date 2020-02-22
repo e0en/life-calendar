@@ -1,0 +1,22 @@
+body {
+  background: white;
+}
+table {
+  box-sizing: border-box;
+  border-spacing: calc(24vw / 53);
+  width: 100%;
+}
+
+tr {
+  height: calc(1vw + calc(24vw / 53));
+}
+
+td.week {
+  margin: 0;
+  background: white;
+  border: 1px black solid;
+}
+
+td.spent {
+  background: black;
+}
