@@ -1,6 +1,11 @@
 body {
   background: white;
   font-family: 'Open Sans', sans-serif;
+  text-align: center;
+}
+
+#wrapper {
+  margin: 0 auto;
 }
 
 h1 {
@@ -14,6 +19,7 @@ table {
   border-spacing: calc(12vw / 53);
   width: 100%;
   font-size: 1vw;
+  line-height: 1vw;
   text-align: right;
 }
 

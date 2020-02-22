@@ -26,21 +26,24 @@
     <link rel="stylesheet" href=".{{ url_for('static', filename='screen.css') }}">
 </head>
 <body>
-  <h1>90-year life calendar ({{ birthday }})</h1>
-  <p>Idea taken from <a href="https://waitbutwhy.com/2014/05/life-weeks.html">this post from waitbutwhy</a>.</p>
-  <table>
-    {% for y in range(1, 91) %}
-    <tr>
-      <td>
-        {% if y % 5 == 0 %}{{ y }}{% endif %}
-      </td>
-      {% for w in range(52) %}
-      <td class="week {% if (y * 52 + w) < used_weeks %}spent{% endif %}"></td>
+  <div id="wrapper">
+    <h1>Your Life in Weeks</h1>
+    <p>{{ used_weeks }} of 4680 weeks have passed since {{ birthday }}</p>
+    <table>
+      {% for y in range(1, 91) %}
+      <tr>
+        <td>
+          {% if y % 5 == 0 %}{{ y }}{% endif %}
+        </td>
+        {% for w in range(52) %}
+        <td class="week {% if (y * 52 + w) < used_weeks %}spent{% endif %}"></td>
+        {% endfor %}
+      </tr>
       {% endfor %}
-    </tr>
-    {% endfor %}
-  </table>
-  <p><a href="https://github.com/e0en/life-calendar">github: e0en/life-calendar</a></p>
+    </table>
+    <p>Idea taken from <cite><a href="https://waitbutwhy.com/2014/05/life-weeks.html">Your Life in Weeks</a></cite>.</p>
+    <p><a href="https://github.com/e0en/life-calendar">github: e0en/life-calendar</a></p>
+  </div>
 </body>
 </html>
 
