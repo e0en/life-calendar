@@ -5,7 +5,7 @@ table {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  border-spacing: calc(24vw / 53);
+  border-spacing: calc(12vw / 53);
   width: 100%;
   font-size: 1vw;
   text-align: right;
@@ -14,11 +14,11 @@ table {
 tr {
   margin: 0;
   padding: 0;
-  height: calc(1vw + calc(24vw / 53));
+  height: calc(1vw + calc(36vw / 53));
 }
 
 td.week {
-  width: calc(1vw + calc(24vw / 53));
+  width: calc(1vw + calc(36vw / 53));
   margin: 0;
   padding: 0;
   background: white;
