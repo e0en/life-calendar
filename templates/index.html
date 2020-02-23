@@ -28,7 +28,11 @@
 <body>
   <div id="wrapper">
     <h1>Your Life in Weeks</h1>
-    <p>{{ used_weeks }} of 4680 weeks have passed since {{ birthday }}</p>
+    {% if birthday %}
+    <p>
+      {{ used_weeks }} of 4680 weeks have passed since {{ birthday }}.
+      Click <a href="?">here</a> to re-set your birthday.
+    </p>
     <table>
       {% for y in range(1, 91) %}
       <tr>
@@ -41,6 +45,13 @@
       </tr>
       {% endfor %}
     </table>
+    {% else %}
+    <p>We need your birthday to show your life calendar.</p>
+    <form action="#">
+      <input type="date" name="birthday" />
+      <input type="submit" value="submit" />
+    </form>
+    {% endif %}
     <p>Idea taken from <cite><a href="https://waitbutwhy.com/2014/05/life-weeks.html">Your Life in Weeks</a></cite>.</p>
     <p><a href="https://github.com/e0en/life-calendar">github: e0en/life-calendar</a></p>
   </div>

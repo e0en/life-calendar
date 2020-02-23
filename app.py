@@ -15,9 +15,12 @@ app.url_map.strict_slashes = False
 
 @app.route('/', methods=['GET'])
 def index():
-    birthday_str = request.args.get('birthday', default='1986-06-25', type=str)
-    birthday = datetime.strptime(birthday_str, '%Y-%m-%d')
-    weeks_from_now = int((datetime.now() - birthday).days / 7)
+    birthday_str = request.args.get('birthday', type=str)
+    if birthday_str:
+        birthday = datetime.strptime(birthday_str, '%Y-%m-%d')
+        weeks_from_now = int((datetime.now() - birthday).days / 7)
+    else:
+        weeks_from_now = None
     return render_template('index.html',
                            birthday=birthday_str,
                            used_weeks=weeks_from_now)
