@@ -28,13 +28,13 @@
 <body>
   <div id="wrapper">
     <h1>Your Life in Weeks</h1>
-    {% if birthday %}
+    {% if used_weeks %}
     <p>
-      {{ used_weeks }} of 4680 weeks have passed since {{ birthday }}.
-      Click <a href="?">here</a> to re-set your birthday.
+    {{ used_weeks }} of {{ lifespan * 52 }} weeks have passed since {{ birthday }}.
+      Click <a href="?">here</a> to re-set your info.
     </p>
     <table>
-      {% for y in range(1, 91) %}
+      {% for y in range(1, lifespan + 1) %}
       <tr>
         <td class="year-label">
           {% if y % 5 == 0 %}{{ y }}{% endif %}
@@ -46,9 +46,12 @@
       {% endfor %}
     </table>
     {% else %}
-    <p>We need your birthday to show your life calendar.</p>
     <form action="#">
-      <input type="date" name="birthday" />
+      <p>Please provide some information to build your calendar.</p>
+      <label for="birthday">Birthday</label><br />
+      <input type="date" name="birthday" /><br />
+      <label for="lifespan">Expected lifespan</label><br />
+      <input type="number" name="lifespan" value="90" /><br />
       <input type="submit" value="submit" />
     </form>
     {% endif %}
