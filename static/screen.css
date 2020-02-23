@@ -5,7 +5,9 @@ body {
 }
 
 #wrapper {
+  text-align: left;
   margin: 0 auto;
+  padding: 1em;
   max-width: 768px;
 }
 
@@ -13,9 +15,18 @@ h1 {
   font-family: 'Merriweather', serif;
 }
 
+input {
+  width: 10em;
+  margin: 8px 0 8px 0;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
 table {
   box-sizing: border-box;
   margin: 0;
+  margin-left: -5em;
   padding: 0;
   border-spacing: 1px;
   width: 100%;
@@ -30,13 +41,13 @@ tr {
 }
 
 td.year-label {
-  width: 3%;
+  width: 5em;
 }
 
 td.week {
   box-sizing: border-box;
   margin: 0;
-  padding-bottom: calc(97% / 52 / 1.2);
+  padding-bottom: calc((100% - 5em) / 52 / 1.2);
   background: white;
   border: 1px black solid;
   border-radius: 2px;
