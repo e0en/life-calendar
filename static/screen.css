@@ -6,6 +6,7 @@ body {
 
 #wrapper {
   margin: 0 auto;
+  max-width: 768px;
 }
 
 h1 {
@@ -16,7 +17,7 @@ table {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
-  border-spacing: calc(12vw / 53);
+  border-spacing: 1px;
   width: 100%;
   font-size: 1vw;
   line-height: 1vw;
@@ -26,15 +27,19 @@ table {
 tr {
   margin: 0;
   padding: 0;
-  height: calc(1vw + calc(36vw / 53));
+}
+
+td.year-label {
+  width: 3%;
 }
 
 td.week {
-  width: calc(1vw + calc(36vw / 53));
+  box-sizing: border-box;
   margin: 0;
-  padding: 0;
+  padding-bottom: calc(97% / 52 / 1.2);
   background: white;
   border: 1px black solid;
+  border-radius: 2px;
   overflow: hidden;
 }
 
