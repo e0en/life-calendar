@@ -24,6 +24,7 @@
     <title>Life calendar</title>
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href=".{{ url_for('static', filename='screen.css') }}">
+    <script src="{{ url_for('static', filename='lifecal.js') }}" defer></script>
 </head>
 <body>
   <div id="wrapper">
@@ -31,7 +32,7 @@
     {% if used_weeks %}
     <p>
     {{ used_weeks }} of {{ lifespan * 52 }} weeks have passed since {{ birthday }}.
-      Click <a href="?">here</a> to re-set your info.
+      Click <a href="?reset=1">here</a> to re-set your info.
     </p>
     <table>
       {% for y in range(1, lifespan + 1) %}
