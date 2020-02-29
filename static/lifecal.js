@@ -1,13 +1,64 @@
+const dbName = 'life-calendar'
+const storeName = 'users'
+
+const getDB = function(onsuccess) {
+  let openRequest = indexedDB.open(dbName)
+  openRequest.onupgradeneeded = function() {
+    let db = openRequest.result
+    if (!db.objectStoreNames.contains(storeName)) {
+      db.createObjectStore(storeName, {keyPath: 'id'})
+    }
+  }
+  openRequest.onerror = function() {
+    console.error('Error', openRequest.error)
+  }
+  openRequest.onsuccess = function() {
+    let db = openRequest.result
+    let tx = db.transaction(storeName, 'readwrite')
+    let store = tx.objectStore(storeName)
+
+    onsuccess(store)
+
+    tx.oncomplete = function() {
+      db.close()
+    }
+  }
+}
+
 const saveSettings = function(birthday, lifespan) {
-  const storage = window.localStorage
-  storage.setItem('birthday', birthday)
-  storage.setItem('lifespan', lifespan)
+  user = {
+    id: 0,
+    birthday: birthday,
+    lifespan: lifespan
+  }
+
+  getDB(function(store) {
+    let request = store.put(user)
+    request.onsuccess = function() {
+      console.log('User added to the store', request.result)
+    }
+    request.onerror = function() {
+      console.log('Error', request.error)
+    }
+  })
+}
+
+const loadSettings = function(onsuccess) {
+  getDB(function(store) {
+    let request = store.get(0)
+    request.onsuccess = function() {
+      const user = request.result
+      if (user) {
+        onsuccess(user)
+      }
+    }
+  })
 }
 
 const clearSettings = function() {
-  const storage = window.localStorage
-  storage.removeItem('birthday')
-  storage.removeItem('lifespan')
+  getDB(function(store) {
+    let request = store.delete(0)
+  })
 }
 
 const submitForm = function(ev) {
@@ -35,14 +86,12 @@ window.onload = function() {
     clearSettings()
   }
 
+
   if (birthday && lifespan) {
     saveSettings(birthday, lifespan)
   } else if (!(birthday && lifespan)) {
-    const storage = window.localStorage
-    const storedBirthday = storage.getItem('birthday')
-    const storedLifespan = storage.getItem('lifespan')
-    if (storedBirthday && storedLifespan) {
-      window.location = '/?birthday=' + storedBirthday + '&lifespan=' + storedLifespan
-    }
+    loadSettings(function(user) {
+      window.location = '/?birthday=' + user.birthday + '&lifespan=' + user.lifespan
+    })
   }
 }
