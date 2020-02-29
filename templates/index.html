@@ -52,7 +52,7 @@
       <label for="birthday">Birthday</label><br />
       <input type="date" name="birthday" /><br />
       <label for="lifespan">Expected lifespan</label><br />
-      <input type="number" name="lifespan" value="90" /><br />
+      <input type="text" inputmode="numeric" pattern="[0-9]*" name="lifespan" value="90" /><br />
       <input type="submit" value="submit" />
     </form>
     {% endif %}
