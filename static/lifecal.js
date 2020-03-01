@@ -69,29 +69,64 @@ const submitForm = function(ev) {
   saveSettings(birthday, lifespan)
 }
 
+const drawCalendar = function(birthday, lifespan) {
+  const now = Date.now()
+  const usedWeeks = Math.round((now - birthday) / 7 / 86400.0 / 1000.0)
+  const allWeeks = lifespan * 52
+
+  document.getElementById('used-weeks').innerText = usedWeeks.toString()
+  document.getElementById('all-weeks').innerText = allWeeks.toString()
+
+  const tables = document.getElementsByTagName('table')
+  const table = tables[0]
+  while (table.firstChild) {
+    table.removeChild(table.lastChild);
+  }
+  for (let y = 1; y <= lifespan; y++) {
+    const tr = document.createElement('tr')
+    const yearLabel = document.createElement('td')
+    yearLabel.classList.add('year-label')
+    if (y % 5 == 0) {
+      yearLabel.innerText = y.toString()
+    }
+    tr.appendChild(yearLabel)
+
+    for (let w = 0; w < 52; w++) {
+      const week = document.createElement('td')
+      week.classList.add('week')
+      if (((y - 1) * 52 + w) < usedWeeks) {
+        week.classList.add('spent')
+      }
+      tr.appendChild(week)
+    }
+    table.appendChild(tr)
+  }
+}
+
 window.onload = function() {
   const forms = document.getElementsByTagName('form')
   if (forms.length > 0) {
-    console.log(forms)
     const form = forms[0]
     form.addEventListener('submit', submitForm)
   }
 
   const queryString = window.location.search
   const urlParams = new URLSearchParams(queryString)
-  const birthday = urlParams.get('birthday')
-  const lifespan = urlParams.get('lifespan')
+  const birthday = Date.parse(urlParams.get('birthday'))
+  const lifespan = parseInt(urlParams.get('lifespan'))
   const is_reset = urlParams.get('reset')
   if (is_reset) {
     clearSettings()
   }
 
-
   if (birthday && lifespan) {
+    drawCalendar(birthday, lifespan)
     saveSettings(birthday, lifespan)
-  } else if (!(birthday && lifespan)) {
+  } else {
     loadSettings(function(user) {
-      window.location = '/?birthday=' + user.birthday + '&lifespan=' + user.lifespan
+      const birthday = new Date(user.birthday)
+      const dateStr = birthday.getFullYear() + '-' + (birthday.getMonth() + 1) + '-' + birthday.getDate()
+      window.location = '/?birthday=' + dateStr + '&lifespan=' + user.lifespan
     })
   }
 }
