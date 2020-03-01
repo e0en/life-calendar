@@ -15,17 +15,7 @@ app.url_map.strict_slashes = False
 
 @app.route('/', methods=['GET'])
 def index():
-    birthday_str = request.args.get('birthday', type=str)
-    lifespan = request.args.get('lifespan', type=int)
-    if birthday_str and lifespan:
-        birthday = datetime.strptime(birthday_str, '%Y-%m-%d')
-        weeks_from_now = int((datetime.now() - birthday).days / 7)
-    else:
-        weeks_from_now = None
-    return render_template('index.html',
-                           birthday=birthday_str,
-                           lifespan=lifespan,
-                           used_weeks=weeks_from_now)
+    return render_template('index.html')
 
 
 if __name__ == '__main__':

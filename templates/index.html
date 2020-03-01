@@ -29,27 +29,14 @@
 <body>
   <div id="wrapper">
     <h1>Your Life in Weeks</h1>
-    {% if used_weeks %}
     <section id="calendar">
       <p>
-      <span id="used-weeks">{{ used_weeks }}</span> of <span id="all-weeks">{{ lifespan * 52 }}</span> weeks have passed
-      since <span id="birthday">birthday</span>.
+        <span id="used-weeks">used-weeks</span> of <span id="all-weeks">all-weeks</span> weeks have passed.
         Click <a href="?reset=1">here</a> to re-set your info.
       </p>
       <table>
-        {% for y in range(1, lifespan + 1) %}
-        <tr>
-          <td class="year-label">
-            {% if y % 5 == 0 %}{{ y }}{% endif %}
-          </td>
-          {% for w in range(52) %}
-          <td class="week {% if (y * 52 + w) < used_weeks %}spent{% endif %}"></td>
-          {% endfor %}
-        </tr>
-        {% endfor %}
       </table>
     </section>
-    {% else %}
     <form action="#">
       <p>Please provide some information to build your calendar.</p>
       <label for="birthday">Birthday</label><br />
@@ -58,7 +45,6 @@
       <input type="text" inputmode="numeric" pattern="[0-9]*" name="lifespan" value="90" /><br />
       <input type="submit" value="submit" />
     </form>
-    {% endif %}
     <p>
       To learn more about Life calendar, check the original blog post
       <cite><a href="https://waitbutwhy.com/2014/05/life-weeks.html">Your Life in Weeks</a></cite> by Tim Urban.

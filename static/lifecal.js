@@ -43,14 +43,19 @@ const saveSettings = function(birthday, lifespan) {
   })
 }
 
-const loadSettings = function(onsuccess) {
+const loadSettings = function(onsuccess, onfail) {
   getDB(function(store) {
     let request = store.get(0)
     request.onsuccess = function() {
       const user = request.result
       if (user) {
         onsuccess(user)
+      } else {
+        onfail()
       }
+    }
+    request.onfail = function() {
+      onfail()
     }
   })
 }
@@ -104,29 +109,25 @@ const drawCalendar = function(birthday, lifespan) {
 }
 
 window.onload = function() {
+  const queryString = window.location.search
+  const urlParams = new URLSearchParams(queryString)
+  const is_reset = urlParams.get('reset')
+  if (is_reset) {
+    clearSettings()
+  }
   const forms = document.getElementsByTagName('form')
   if (forms.length > 0) {
     const form = forms[0]
     form.addEventListener('submit', submitForm)
   }
 
-  const queryString = window.location.search
-  const urlParams = new URLSearchParams(queryString)
-  const birthday = Date.parse(urlParams.get('birthday'))
-  const lifespan = parseInt(urlParams.get('lifespan'))
-  const is_reset = urlParams.get('reset')
-  if (is_reset) {
-    clearSettings()
-  }
+  loadSettings(onsuccess = function(user) {
+    document.getElementsByTagName('form')[0].style.display = 'none'
+    const birthday = new Date(user.birthday)
+    const dateStr = birthday.getFullYear() + '-' + (birthday.getMonth() + 1) + '-' + birthday.getDate()
+    drawCalendar(birthday, user.lifespan)
+  }, onfail = function() {
+    document.getElementsByTagName('section')[0].style.display = 'none'
+  })
 
-  if (birthday && lifespan) {
-    drawCalendar(birthday, lifespan)
-    saveSettings(birthday, lifespan)
-  } else {
-    loadSettings(function(user) {
-      const birthday = new Date(user.birthday)
-      const dateStr = birthday.getFullYear() + '-' + (birthday.getMonth() + 1) + '-' + birthday.getDate()
-      window.location = '/?birthday=' + dateStr + '&lifespan=' + user.lifespan
-    })
-  }
 }
