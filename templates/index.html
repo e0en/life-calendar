@@ -8,6 +8,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://lifecal.2501.sh/">
     <meta property="og:image" content="https://lifecal.2501.sh/{{ url_for('static', filename='icon-512.png') }}">
+    <meta name="theme-color" content="#ffffff" />
     <link rel="icon" type="image/png" href=".{{ url_for('static', filename='icon-16.png') }}" sizes="16x16">
     <link rel="icon" type="image/png" href=".{{ url_for('static', filename='icon-32.png') }}" sizes="32x32">
     <link rel="icon" type="image/png" href=".{{ url_for('static', filename='icon-48.png') }}" sizes="48x48">
@@ -21,6 +22,8 @@
     <link rel="icon" type="image/png" href=".{{ url_for('static', filename='icon-192.png') }}" sizes="192x192">
     <link rel="icon" type="image/png" href=".{{ url_for('static', filename='icon-384.png') }}" sizes="384x384">
     <link rel="icon" type="image/png" href=".{{ url_for('static', filename='icon-512.png') }}" sizes="512x512">
+    <link rel="apple-touch-icon" type="image/png" href=".{{ url_for('static', filename='icon-192.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <title>Life calendar</title>
     <link href="https://fonts.googleapis.com/css?family=Merriweather|Open+Sans&display=swap" rel="stylesheet">
     <link rel="stylesheet" href=".{{ url_for('static', filename='screen.css') }}">

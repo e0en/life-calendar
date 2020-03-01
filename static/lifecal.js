@@ -85,7 +85,7 @@ const drawCalendar = function(birthday, lifespan) {
   const tables = document.getElementsByTagName('table')
   const table = tables[0]
   while (table.firstChild) {
-    table.removeChild(table.lastChild);
+    table.removeChild(table.lastChild)
   }
   for (let y = 1; y <= lifespan; y++) {
     const tr = document.createElement('tr')
@@ -108,7 +108,16 @@ const drawCalendar = function(birthday, lifespan) {
   }
 }
 
+const loadServiceWorker = function() {
+  navigator.serviceWorker.register('/service-worker.js').then(function(registration) {
+    console.log('ServiceWorker registration successful with scope: ', registration.scope)
+  }, function(err) {
+    console.log('ServiceWorker registration failed: ', err)
+  })
+}
+
 window.onload = function() {
+  loadServiceWorker()
   const queryString = window.location.search
   const urlParams = new URLSearchParams(queryString)
   const is_reset = urlParams.get('reset')
