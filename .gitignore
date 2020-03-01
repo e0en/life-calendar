@@ -1,10 +1,5 @@
-# python
-*.py[cdo]
-__pycache__/
-
-# editor and pyenv
-.python-version
+# vim
 /.vim/
-
-# private files
-/secret.py
+[._]*.s[a-v][a-z]
+!*.svg
+tags
