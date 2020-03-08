@@ -82,29 +82,33 @@ const drawCalendar = function(birthday, lifespan) {
   document.getElementById('used-weeks').innerText = usedWeeks.toString()
   document.getElementById('all-weeks').innerText = allWeeks.toString()
 
-  const tables = document.getElementsByTagName('table')
-  const table = tables[0]
-  while (table.firstChild) {
-    table.removeChild(table.lastChild)
+  const calendar = document.getElementById('calendar')
+  while (calendar.firstChild) {
+    calendar.removeChild(calendar.lastChild)
   }
   for (let y = 1; y <= lifespan; y++) {
-    const tr = document.createElement('tr')
-    const yearLabel = document.createElement('td')
+    const year = document.createElement('div')
+    year.classList.add('year')
+
+    const yearLabel = document.createElement('span')
     yearLabel.classList.add('year-label')
     if (y % 5 == 0) {
       yearLabel.innerText = y.toString()
     }
-    tr.appendChild(yearLabel)
+    year.appendChild(yearLabel)
 
+    const weekList = document.createElement('ol')
+    weekList.classList.add('week-list')
     for (let w = 0; w < 52; w++) {
-      const week = document.createElement('td')
+      const week = document.createElement('li')
       week.classList.add('week')
       if (((y - 1) * 52 + w) < usedWeeks) {
         week.classList.add('spent')
       }
-      tr.appendChild(week)
+      weekList.appendChild(week)
     }
-    table.appendChild(tr)
+    year.appendChild(weekList)
+    calendar.appendChild(year)
   }
 }
 
@@ -117,7 +121,7 @@ const loadServiceWorker = function() {
 }
 
 window.onload = function() {
-  loadServiceWorker()
+  // loadServiceWorker()
   const queryString = window.location.search
   const urlParams = new URLSearchParams(queryString)
   const is_reset = urlParams.get('reset')
