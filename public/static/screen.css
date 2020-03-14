@@ -1,18 +1,20 @@
 body {
   background: white;
   font-family: 'Open Sans', sans-serif;
+  font-size: 16px;
   text-align: center;
 }
 
 #wrapper {
   text-align: left;
   margin: 0 auto;
-  padding: 1em;
+  padding: 0.5em;
   max-width: 768px;
 }
 
 h1 {
   font-family: 'Merriweather', serif;
+  color: black;
 }
 
 input {
@@ -29,22 +31,19 @@ input {
   height: 16px;
 }
 
+.year:nth-child(5n+0) {
+  margin-bottom: 4px;
+}
+
 .year-label {
-  display: block;
-  float: left;
-  box-sizing: border-box;
-  width: 2em;
-  height: 100%;
-  padding-right: 0.5em;
-  line-height: 100%;
-  text-align: right;
+  display: none;
 }
 
 .week-list {
   display: block;
   float: right;
   box-sizing: border-box;
-  width: calc(100% - 2em);
+  width: 100%;
   height: 100%;
   margin: 0;
   padding: 0;
@@ -71,4 +70,27 @@ input {
 
 .week-list li.spent {
   background: black;
+}
+
+@media only screen and (min-width: 480px) {
+  #wrapper {
+    padding: 1em;
+  }
+
+  .year-label {
+    display: block;
+    float: left;
+    box-sizing: border-box;
+    height: 100%;
+    padding-right: 0.5em;
+    font-size: 12px;
+    line-height: 100%;
+    text-align: right;
+    font-size: 100%;
+    width: 2em;
+  }
+
+  .week-list {
+    width: calc(100% - 2em);
+  }
 }
