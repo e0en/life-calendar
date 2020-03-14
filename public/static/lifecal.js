@@ -62,7 +62,7 @@ const loadSettings = function(onsuccess, onfail) {
 
 const clearSettings = function() {
   getDB(function(store) {
-    let request = store.delete(0)
+    store.delete(0)
   })
 }
 
@@ -137,7 +137,6 @@ window.onload = function() {
   loadSettings(onsuccess = function(user) {
     document.getElementsByTagName('form')[0].style.display = 'none'
     const birthday = new Date(user.birthday)
-    const dateStr = birthday.getFullYear() + '-' + (birthday.getMonth() + 1) + '-' + birthday.getDate()
     drawCalendar(birthday, user.lifespan)
   }, onfail = function() {
     document.getElementsByTagName('section')[0].style.display = 'none'
