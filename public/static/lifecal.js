@@ -121,7 +121,7 @@ const loadServiceWorker = function() {
 }
 
 window.onload = function() {
-  // loadServiceWorker()
+  loadServiceWorker()
   const queryString = window.location.search
   const urlParams = new URLSearchParams(queryString)
   const is_reset = urlParams.get('reset')

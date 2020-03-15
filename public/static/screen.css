@@ -1,8 +1,28 @@
+:root {
+  --background-color: white;
+  --title-color: black;
+  --text-color: black;
+  --link-color: #999;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background-color: black;
+    --title-color: #ccc;
+    --text-color: #666;
+  }
+}
+
 body {
-  background: white;
+  background: var(--background-color);
   font-family: 'Open Sans', sans-serif;
   font-size: 16px;
   text-align: center;
+  color: var(--text-color);
+}
+
+a {
+  color: var(--link-color);
 }
 
 #wrapper {
@@ -14,7 +34,7 @@ body {
 
 h1 {
   font-family: 'Merriweather', serif;
-  color: black;
+  color: var(--title-color);
 }
 
 input {
@@ -59,9 +79,9 @@ input {
   width: 16px;
   height: calc(100% - 2px);
   max-width: calc(100% / 52 - 2px);
-  border: 1px solid black;
+  border: 1px solid var(--text-color);
   border-radius: 2px;
-  background: white;
+  background: var(--background-color);
 }
 
 .week-list li:hover, .week-list li.spent:hover {
@@ -69,7 +89,7 @@ input {
 }
 
 .week-list li.spent {
-  background: black;
+  background: var(--text-color);
 }
 
 @media only screen and (min-width: 480px) {
